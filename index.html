@@ -1,0 +1,2553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renewal Residency — Faith. Work. Mission.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────── */
+    :root {
+      --cream:      #F5EFE3;
+      --cream-dark: #EDE5D5;
+      --red:        #C13B28;
+      --red-deep:   #8C2A1A;
+      --red-light:  #D95F45;
+      --ink:        #1C100A;
+      --ink-soft:   #4A3328;
+      --mist:       rgba(193,59,40,0.06);
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', sans-serif;
+
+      --gap-xs: 0.5rem;
+      --gap-sm: 1rem;
+      --gap-md: 2rem;
+      --gap-lg: 4rem;
+      --gap-xl: 7rem;
+
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ─── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.7;
+      overflow-x: hidden;
+      max-width: 100vw;
+      touch-action: pan-y;
+    }
+    html {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Grain texture overlay ──────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    /* ─── Shared utility ─────────────────────────────────── */
+    .container {
+      width: min(1160px, 92vw);
+      margin-inline: auto;
+    }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .display-serif {
+      font-family: var(--font-display);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    .divider {
+      width: 40px;
+      height: 1.5px;
+      background: var(--red);
+      margin-block: var(--gap-md);
+    }
+
+    /* ─── Scroll reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+
+    /* ════════════════════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+      background: rgba(245, 239, 227, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(193, 59, 40, 0.1);
+      transition: padding 0.4s var(--ease-out);
+    }
+    nav.scrolled { padding: 0.75rem 0; }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 58px;
+    }
+    .nav-logo img {
+      height: 100px;
+      width: auto;
+      margin-top: -10px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .nav-logo { height: 48px; }
+      .nav-logo img { height: 82px; margin-top: -8px; }
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.75rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-out), background 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      box-shadow: 0 4px 20px rgba(193, 59, 40, 0.28), 0 1px 4px rgba(193, 59, 40, 0.2);
+    }
+    .btn-primary:hover {
+      background: var(--red-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(193, 59, 40, 0.38), 0 2px 8px rgba(193, 59, 40, 0.24);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-outline {
+      background: transparent;
+      color: var(--red);
+      border: 1.5px solid var(--red);
+    }
+    .btn-outline:hover {
+      background: var(--red);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(193, 59, 40, 0.28);
+    }
+    .btn-outline:active { transform: translateY(0); }
+    .nav-mobile-toggle { display: none; }
+    .nav-mobile-menu { display: none; }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-mobile-toggle {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        position: relative;
+        z-index: 102;
+      }
+      .nav-mobile-toggle span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: var(--ink);
+        transition: transform 0.25s var(--ease-out), opacity 0.2s var(--ease-out);
+      }
+      nav.mobile-open .nav-mobile-toggle span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      nav.mobile-open .nav-mobile-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+      nav.mobile-open .nav-mobile-toggle span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+      .nav-mobile-menu {
+        display: grid;
+        gap: 0.35rem;
+        position: absolute;
+        top: calc(100% + 0.4rem);
+        left: 1rem;
+        right: 1rem;
+        padding: 1rem;
+        background: rgba(245, 239, 227, 0.98);
+        border: 1px solid rgba(193, 59, 40, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 20px 40px rgba(28, 16, 10, 0.12);
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+      }
+      nav.mobile-open .nav-mobile-menu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .nav-mobile-menu a {
+        padding: 0.9rem 0.25rem;
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        border-bottom: 1px solid rgba(193, 59, 40, 0.08);
+      }
+      .nav-mobile-menu a:last-child {
+        border-bottom: none;
+      }
+      .nav-mobile-menu .btn {
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.45rem;
+        padding: 0.9rem 1.2rem;
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 100px;
+      padding-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Arc background motif echoing the globe in the logo */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -15%;
+      width: 80vw;
+      max-width: 900px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(193, 59, 40, 0.1);
+      pointer-events: none;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: -42%;
+      right: -22%;
+      width: 80vw;
+      max-width: 900px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(193, 59, 40, 0.06);
+      pointer-events: none;
+    }
+    /* Radial glow */
+    .hero-glow {
+      position: absolute;
+      top: 0; right: 0;
+      width: 60vw;
+      height: 100%;
+      background: radial-gradient(ellipse at 80% 30%, rgba(193,59,40,0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-bottom: var(--gap-lg);
+    }
+    .hero-globe {
+      position: absolute;
+      top: 50%;
+      right: -4%;
+      transform: translateY(-54%);
+      width: min(520px, 44vw);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      animation: globeReveal 2s var(--ease-out) 0.6s forwards;
+    }
+    @keyframes globeReveal {
+      to { opacity: 1; }
+    }
+    /* Pulsing center light dot */
+    .globe-center-pulse {
+      transform-origin: 250px 250px;
+      animation: lightPulse 3s ease-in-out infinite;
+    }
+    @keyframes lightPulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.6); }
+    }
+    @media (max-width: 900px) { .hero-globe { display: none; } }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-sm);
+      margin-bottom: 2rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--red);
+    }
+    .hero-headline {
+      font-size: clamp(4.5rem, 11vw, 11rem);
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 0.1em;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+    .hero-sub {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 300;
+      color: var(--ink-soft);
+      max-width: 520px;
+      line-height: 1.5;
+      margin-bottom: 2.5rem;
+      margin-top: 1.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-md);
+      flex-wrap: wrap;
+    }
+    .hero-scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0 0.75rem;
+    }
+    .scroll-chevron {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.5;
+      animation: chevronBob 2.2s ease-in-out infinite;
+    }
+    @keyframes chevronBob {
+      0%, 100% { opacity: 0.35; transform: translateY(0); }
+      50% { opacity: 0.75; transform: translateY(5px); }
+    }
+    .hero-stat-strip {
+      position: relative;
+      border-top: 1px solid rgba(193,59,40,0.15);
+      background: rgba(237, 229, 213, 0.5);
+      backdrop-filter: blur(4px);
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      divide: var(--ink-soft);
+    }
+    .hero-stat {
+      padding: 1.5rem var(--gap-md);
+      border-right: 1px solid rgba(193,59,40,0.12);
+      text-align: center;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--red);
+      line-height: 1;
+      display: block;
+    }
+    .hero-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-top: 0.35rem;
+      display: block;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       PROBLEM VALIDATION
+    ════════════════════════════════════════════════════════ */
+    .problem {
+      padding-block: var(--gap-xl);
+      background: var(--cream-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-xl);
+      align-items: start;
+    }
+    .problem-left {}
+    .problem-headline {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-top: 0.75rem;
+      margin-bottom: var(--gap-md);
+    }
+    .problem-headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+    .problem-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 480px;
+    }
+    .problem-tensions {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-top: 1rem;
+    }
+    .problem-tension {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding-block: 2.5rem;
+      border-bottom: 1px solid rgba(193,59,40,0.1);
+    }
+    .problem-tension:first-child { border-top: 1px solid rgba(193,59,40,0.1); }
+    .problem-tension-mark {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      margin-top: 0.55em;
+      opacity: 0.5;
+    }
+    .problem-tension-text {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .problem-tension-text em {
+      font-style: italic;
+      color: var(--red);
+    }
+    .problem-bridge {
+      margin-top: var(--gap-md);
+      padding: 2rem 2.25rem;
+      background: var(--ink);
+      border-radius: 3px;
+      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 300;
+      line-height: 1.55;
+      font-style: italic;
+    }
+    .problem-bridge strong {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--red-light);
+    }
+    @media (max-width: 800px) {
+      .problem-inner { grid-template-columns: 1fr; gap: var(--gap-lg); }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       ABOUT / OVERVIEW
+    ════════════════════════════════════════════════════════ */
+    .about {
+      padding-block: var(--gap-xl);
+      background: var(--ink);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Multiple layered radial glows for depth */
+    .about::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 70vw;
+      max-width: 900px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(193,59,40,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .about-bg-arc {
+      position: absolute;
+      bottom: -15%;
+      left: -8%;
+      width: 55vw;
+      max-width: 700px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(245,239,227,0.05);
+      pointer-events: none;
+    }
+    .about-bg-arc::after {
+      content: '';
+      position: absolute;
+      inset: 15%;
+      border-radius: 50%;
+      border: 1px solid rgba(245,239,227,0.04);
+    }
+    /* Top section: eyebrow + large headline + body in a two-column split */
+    .about-top {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: var(--gap-xl);
+      align-items: end;
+      padding-bottom: var(--gap-lg);
+      border-bottom: 1px solid rgba(245,239,227,0.08);
+      margin-bottom: var(--gap-lg);
+      position: relative;
+      z-index: 1;
+    }
+    .about-headline {
+      font-size: clamp(3.2rem, 5.5vw, 6rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+    }
+    .about-headline em {
+      font-style: italic;
+      color: var(--red-light);
+    }
+    .about-top-right {
+      padding-bottom: 0.5rem;
+    }
+    .about-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(245,239,227,0.7);
+    }
+    .about-body p + p { margin-top: 1rem; }
+    /* Pillars row */
+    .about-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(245,239,227,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+    .about-pillar {
+      padding: 2.75rem 2.5rem;
+      background: rgba(245,239,227,0.03);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+    .about-pillar:hover {
+      background: rgba(193,59,40,0.14);
+    }
+    /* Animated red top border on hover */
+    .about-pillar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease-out);
+    }
+    .about-pillar:hover::before { transform: scaleX(1); }
+    /* Large background number */
+    .about-pillar::after {
+      content: attr(data-num);
+      position: absolute;
+      bottom: -0.15em;
+      right: -0.05em;
+      font-family: var(--font-display);
+      font-size: 9rem;
+      font-weight: 700;
+      color: rgba(245,239,227,0.03);
+      line-height: 1;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+    }
+    .about-pillar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(193,59,40,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+    .about-pillar-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--red-light);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .about-pillar-num {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--red-light);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .about-pillar-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .about-pillar-desc {
+      font-size: 0.88rem;
+      color: rgba(245,239,227,0.55);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 900px) {
+      .about-top { grid-template-columns: 1fr; gap: var(--gap-lg); }
+      .about-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       WHO IT'S FOR
+    ════════════════════════════════════════════════════════ */
+    .for-section {
+      padding-block: var(--gap-xl);
+      background: var(--ink);
+      color: var(--cream);
+      border-top: 1px solid rgba(245,239,227,0.07);
+    }
+    .for-header {
+      text-align: center;
+      max-width: 680px;
+      margin-inline: auto;
+      margin-bottom: var(--gap-lg);
+    }
+    .for-header .display-serif {
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      font-weight: 300;
+      margin-top: 0.75rem;
+      color: var(--cream);
+    }
+    .for-header .display-serif em {
+      font-style: italic;
+      color: var(--red-light);
+    }
+    .for-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+    }
+    .for-card {
+      padding: 3rem;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+    .for-card-yes {
+      background: var(--red);
+      color: white;
+    }
+    .for-card-no {
+      background: rgba(245,239,227,0.08);
+      color: var(--cream);
+      border: 1px solid rgba(245,239,227,0.18);
+    }
+    .for-card-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+    }
+    .for-card-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+    .for-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .for-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .for-list li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.55em;
+    }
+    .for-card-yes .for-list li::before {
+      background: rgba(255,255,255,0.6);
+    }
+    .for-card-no .for-list li::before {
+      background: var(--red-light);
+    }
+    .for-card-yes .for-list li { color: rgba(255,255,255,0.88); }
+    .for-card-no .for-list li { color: rgba(245,239,227,0.85); }
+
+    @media (max-width: 720px) {
+      .for-grid { grid-template-columns: 1fr; }
+      .for-card { padding: 2rem; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       HOW IT WORKS
+    ════════════════════════════════════════════════════════ */
+    .how {
+      padding-block: var(--gap-xl);
+      background: var(--cream-dark);
+      position: relative;
+      overflow: hidden;
+    }
+    .how::after {
+      content: '';
+      position: absolute;
+      right: -8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50vw;
+      max-width: 600px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(193,59,40,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .how-header {
+      margin-bottom: var(--gap-lg);
+    }
+    .how-headline {
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      font-weight: 300;
+      max-width: 560px;
+      margin-top: 0.75rem;
+    }
+    .how-headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-md);
+      position: relative;
+      z-index: 1;
+    }
+    /* Connecting line between steps */
+    .how-steps::before {
+      content: '';
+      position: absolute;
+      top: 48px;
+      left: calc(33.33% - 10px);
+      right: calc(33.33% - 10px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--red), transparent);
+      opacity: 0.3;
+    }
+    .how-step {
+      padding: 2.5rem 2rem;
+      background: var(--cream);
+      border-radius: 3px;
+      box-shadow: 0 2px 20px rgba(193,59,40,0.06), 0 1px 4px rgba(28,16,10,0.04);
+      transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-out);
+    }
+    .how-step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(193,59,40,0.14), 0 2px 8px rgba(28,16,10,0.06);
+    }
+    .how-step-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+      position: relative;
+    }
+    .how-step-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: white;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .how-step-num {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      border: 1px solid rgba(193,59,40,0.3);
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .how-step-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .how-step-desc {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .how-steps { grid-template-columns: 1fr; }
+      .how-steps::before { display: none; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       CURATED EXPERIENCES
+    ════════════════════════════════════════════════════════ */
+    .experiences {
+      padding-block: var(--gap-xl);
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .experiences-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-xl);
+      align-items: end;
+      margin-bottom: var(--gap-lg);
+      padding-bottom: var(--gap-lg);
+      border-bottom: 1px solid rgba(245,239,227,0.1);
+    }
+    .experiences-headline {
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-top: 0.75rem;
+    }
+    .experiences-headline em {
+      font-style: italic;
+      color: var(--red-light);
+    }
+    .experiences-intro {
+      font-size: 1rem;
+      color: rgba(245,239,227,0.65);
+      line-height: 1.75;
+      padding-bottom: 0.25rem;
+    }
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .experience-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      padding-block: 2.75rem;
+      border-bottom: 1px solid rgba(245,239,227,0.08);
+      transition: background 0.25s, border-color 0.25s;
+      cursor: default;
+      border-radius: 2px;
+      margin-inline: -1.5rem;
+      padding-inline: 1.5rem;
+    }
+    .experience-item:last-child { border-bottom: none; }
+    .experience-item:hover {
+      background: rgba(245,239,227,0.04);
+      border-color: rgba(245,239,227,0.16);
+    }
+    .experience-num {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      font-weight: 300;
+      color: var(--cream);
+      opacity: 0.1;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      transition: opacity 0.25s;
+      text-align: right;
+    }
+    .experience-item:hover .experience-num { opacity: 0.22; }
+    .experience-body {}
+    .experience-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red-light);
+      background: rgba(193,59,40,0.2);
+      padding: 0.25rem 0.7rem;
+      border-radius: 2px;
+      margin-bottom: 0.65rem;
+    }
+    .experience-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+      transition: color 0.25s;
+    }
+    .experience-desc {
+      font-size: 0.92rem;
+      color: rgba(245,239,227,0.6);
+      line-height: 1.7;
+      max-width: 560px;
+      transition: color 0.25s;
+    }
+    .experience-item:hover .experience-title { color: white; }
+    .experience-item:hover .experience-desc { color: rgba(245,239,227,0.78); }
+
+    @media (max-width: 860px) {
+      .experiences-header { grid-template-columns: 1fr; gap: var(--gap-md); }
+      .experience-item { grid-template-columns: 60px 1fr; gap: 1.5rem; }
+      .experience-num { font-size: 3rem; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       INVESTMENT
+    ════════════════════════════════════════════════════════ */
+    .investment {
+      padding-block: var(--gap-xl);
+    }
+    .investment-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-xl);
+      align-items: center;
+    }
+    .investment-headline {
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      font-weight: 300;
+      margin-top: 0.75rem;
+    }
+    .investment-headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+    .investment-body {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin-top: var(--gap-md);
+    }
+    .investment-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-sm);
+    }
+    .investment-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 2.25rem;
+      border: 1px solid rgba(193,59,40,0.18);
+      border-radius: 3px;
+      background: var(--cream);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .investment-card:hover {
+      border-color: rgba(193,59,40,0.45);
+      box-shadow: 0 4px 20px rgba(193,59,40,0.08);
+    }
+    .investment-card-val {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--red);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .investment-card-right {}
+    .investment-card-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .investment-card-note {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .investment-card-sep {
+      width: 1px;
+      height: 48px;
+      background: rgba(193,59,40,0.2);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 800px) {
+      .investment-inner { grid-template-columns: 1fr; gap: var(--gap-lg); }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       PROCESS
+    ════════════════════════════════════════════════════════ */
+    .process {
+      padding-block: var(--gap-xl);
+      background: var(--ink);
+      color: var(--cream);
+      position: relative;
+    }
+    .process-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-xl);
+      align-items: center;
+    }
+    .process-headline {
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-top: 0.75rem;
+    }
+    .process-headline em {
+      font-style: italic;
+      color: var(--red-light);
+    }
+    .process-body {
+      font-size: 1rem;
+      color: rgba(245,239,227,0.7);
+      line-height: 1.75;
+      margin-top: var(--gap-md);
+    }
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .process-step {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+    .process-step:last-child { padding-bottom: 0; }
+    .process-step-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .process-step-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+    }
+    .process-step-connector {
+      width: 1px;
+      flex: 1;
+      background: rgba(245,239,227,0.12);
+      margin-top: 4px;
+    }
+    .process-step:last-child .process-step-connector { display: none; }
+    .process-step-body {
+      padding-top: 0.4rem;
+      padding-bottom: 0.5rem;
+    }
+    .process-step-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    .process-step-desc {
+      font-size: 0.9rem;
+      color: rgba(245,239,227,0.6);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 800px) {
+      .process-inner { grid-template-columns: 1fr; gap: var(--gap-lg); }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       DIFFERENTIATORS
+    ════════════════════════════════════════════════════════ */
+    .diff {
+      padding-block: var(--gap-xl);
+    }
+    .diff-header {
+      text-align: center;
+      max-width: 640px;
+      margin-inline: auto;
+      margin-bottom: var(--gap-lg);
+    }
+    .diff-headline {
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 300;
+      margin-top: 0.75rem;
+    }
+    .diff-headline em { font-style: italic; color: var(--red); }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--gap-md);
+    }
+    .diff-item {
+      padding: 2.75rem;
+      background: linear-gradient(135deg, var(--cream-dark), var(--cream));
+      border-radius: 3px;
+      border: 1px solid rgba(193,59,40,0.1);
+      transition: border-color 0.3s, transform 0.35s var(--ease-spring);
+    }
+    .diff-item:hover {
+      border-color: rgba(193,59,40,0.35);
+      transform: translateY(-4px);
+    }
+    .diff-item-icon {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--red);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .diff-item-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .diff-item-desc {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 640px) {
+      .diff-grid { grid-template-columns: 1fr; }
+      .diff-item { padding: 2rem; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TESTIMONIALS
+    ════════════════════════════════════════════════════════ */
+    .testimonials {
+      padding-block: var(--gap-xl);
+      background: var(--ink);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonials::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.15em;
+      left: -0.05em;
+      font-family: var(--font-display);
+      font-size: clamp(18rem, 30vw, 28rem);
+      font-weight: 700;
+      color: rgba(245,239,227,0.025);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: var(--gap-lg);
+      position: relative;
+      z-index: 1;
+    }
+    .testimonials-headline {
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 300;
+      color: var(--cream);
+      margin-top: 0.75rem;
+    }
+    .testimonials-headline em { font-style: italic; color: var(--red-light); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-card {
+      padding: 3rem;
+      border: 1px solid rgba(245,239,227,0.08);
+      border-radius: 3px;
+      background: rgba(245,239,227,0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(193,59,40,0.35);
+      background: rgba(193,59,40,0.06);
+    }
+    .testimonial-quote-mark {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--red-light);
+      opacity: 0.4;
+      line-height: 0.6;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .testimonial-text {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .testimonial-attr {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(245,239,227,0.08);
+    }
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(193,59,40,0.2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--red-light);
+    }
+    .testimonial-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--cream);
+      display: block;
+    }
+    .testimonial-role {
+      font-size: 0.78rem;
+      color: rgba(245,239,227,0.45);
+      letter-spacing: 0.06em;
+    }
+    @media (max-width: 720px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonial-card { padding: 2rem; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       FAQ
+    ════════════════════════════════════════════════════════ */
+    .faq {
+      padding-block: var(--gap-xl);
+      background: var(--cream-dark);
+    }
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: var(--gap-xl);
+      align-items: start;
+    }
+    .faq-left {
+      position: sticky;
+      top: 100px;
+    }
+    .faq-headline {
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-top: 0.75rem;
+      margin-bottom: var(--gap-md);
+    }
+    .faq-headline em { font-style: italic; color: var(--red); }
+    .faq-left-body {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+    details.faq-item {
+      border-bottom: 1px solid rgba(193,59,40,0.12);
+    }
+    details.faq-item:first-child { border-top: 1px solid rgba(193,59,40,0.12); }
+    summary.faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: 1.6rem;
+      cursor: pointer;
+      list-style: none;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      transition: color 0.2s;
+      user-select: none;
+    }
+    summary.faq-question::-webkit-details-marker { display: none; }
+    summary.faq-question:hover { color: var(--red); }
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(193,59,40,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.25s, border-color 0.25s, transform 0.3s var(--ease-spring);
+    }
+    .faq-icon svg {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition: transform 0.3s var(--ease-spring);
+    }
+    details[open] summary .faq-icon {
+      background: var(--red);
+      border-color: var(--red);
+      transform: rotate(45deg);
+    }
+    details[open] summary .faq-icon svg { stroke: white; }
+    details[open] summary { color: var(--red); }
+    .faq-answer {
+      padding-bottom: 1.6rem;
+      font-size: 0.97rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      max-width: 580px;
+    }
+    @media (max-width: 860px) {
+      .faq-inner { grid-template-columns: 1fr; }
+      .faq-left { position: static; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════════════════════ */
+    .cta-section {
+      padding-block: var(--gap-xl);
+      background: var(--red);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,0,0,0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    /* Large decorative text behind */
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin-inline: auto;
+    }
+    .cta-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 1.5rem;
+    }
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+    .cta-headline em { font-style: italic; }
+    .cta-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-inline: auto;
+      margin-bottom: 3rem;
+    }
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--gap-md);
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      background: white;
+      color: var(--red);
+    }
+    .btn-white:hover {
+      background: var(--cream);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .btn-white:active { transform: translateY(0); }
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.5);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+      transform: translateY(-2px);
+    }
+    .btn-ghost:active { transform: translateY(0); }
+    /* Deadline badge */
+    .deadline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+    .deadline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff9f9f;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.75); }
+    }
+    /* Interest list form */
+    .interest-form {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 440px;
+      margin-inline: auto;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .interest-input {
+      flex: 1;
+      padding: 0.8rem 1.2rem;
+      border-radius: 2px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .interest-input::placeholder { color: rgba(255,255,255,0.45); }
+    .interest-input:focus {
+      border-color: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.15);
+    }
+    @media (max-width: 520px) {
+      .interest-form { flex-direction: column; }
+      .interest-input { width: 100%; flex: unset; }
+      .interest-form .btn { width: 100%; justify-content: center; white-space: normal; }
+    }
+    .interest-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      max-width: 440px;
+      margin-inline: auto;
+    }
+    .interest-divider::before, .interest-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+    .interest-divider span {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       DIRECTOR
+    ════════════════════════════════════════════════════════ */
+    .director {
+      padding-block: var(--gap-xl);
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .director::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -12%;
+      transform: translateY(-50%);
+      width: 45vw;
+      max-width: 560px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(193,59,40,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .director-inner {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: var(--gap-xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .director-photo-wrap {
+      position: relative;
+    }
+    .director-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      filter: grayscale(15%);
+    }
+    /* Red accent corners */
+    .director-photo-wrap::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      width: 64px;
+      height: 64px;
+      border-top: 2px solid var(--red);
+      border-left: 2px solid var(--red);
+      border-radius: 1px;
+    }
+    .director-photo-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      right: -12px;
+      width: 64px;
+      height: 64px;
+      border-bottom: 2px solid var(--red);
+      border-right: 2px solid var(--red);
+      border-radius: 1px;
+    }
+    .director-content {
+      padding-left: var(--gap-md);
+    }
+    .director-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-top: 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+    .director-title {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+    }
+    .director-bio {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+    .director-bio p + p { margin-top: 0.9rem; }
+
+    @media (max-width: 860px) {
+      .director-inner {
+        grid-template-columns: 1fr;
+        gap: var(--gap-lg);
+      }
+      .director-photo-wrap { max-width: 320px; }
+      .director-content { padding-left: 0; }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
+    footer {
+      padding-block: 3rem;
+      background: var(--ink);
+      color: rgba(245,239,227,0.5);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--gap-md);
+    }
+    .footer-logo {
+      overflow: hidden;
+      height: 50px;
+    }
+    .footer-logo img {
+      height: 86px;
+      width: auto;
+      margin-top: -9px;
+      opacity: 0.85;
+      filter: brightness(0) invert(1);
+    }
+    .footer-text {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .footer-link {
+      color: rgba(245,239,227,0.5);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--red-light); }
+
+    /* ════════════════════════════════════════════════════════
+       RESPONSIVE TWEAKS
+    ════════════════════════════════════════════════════════ */
+    @media (max-width: 560px) {
+      :root {
+        --gap-xl: 4.5rem;
+        --gap-lg: 3rem;
+      }
+      .hero-stat-strip { display: none; }
+      .hero {
+        justify-content: center;
+        min-height: 100svh;
+        padding-top: 80px;
+        padding-bottom: var(--gap-lg);
+      }
+      .hero::after {
+        bottom: -20%;
+        right: -40%;
+        width: 130vw;
+        border-color: rgba(193,59,40,0.14);
+      }
+      .hero::before {
+        bottom: -32%;
+        right: -55%;
+        width: 140vw;
+        border-color: rgba(193,59,40,0.08);
+      }
+      .hero-glow {
+        width: 100vw;
+        background: radial-gradient(ellipse at 60% 20%, rgba(193,59,40,0.13) 0%, transparent 60%);
+      }
+      .hero-content { padding-bottom: 0; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-headline { font-size: clamp(3.8rem, 14vw, 5.5rem); }
+      .hero-sub { font-size: 1.05rem; max-width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ───────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="brand_assets/renewal residency_tiny logo.png" alt="Renewal Residency" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#how">Structure</a></li>
+      <li><a href="#investment">Investment</a></li>
+      <li><a href="#apply" class="btn btn-primary" style="padding:0.6rem 1.4rem;">Apply Now</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="#about">About</a>
+      <a href="#how">Structure</a>
+      <a href="#investment">Investment</a>
+      <a href="#apply" class="btn btn-primary">Apply Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-glow"></div>
+
+  <!-- Globe illustration — echoes logo motif, "sent to the world" -->
+  <div class="hero-globe" aria-hidden="true">
+    <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="gc">
+          <circle cx="250" cy="250" r="232"/>
+        </clipPath>
+        <radialGradient id="gg" cx="42%" cy="44%" r="55%">
+          <stop offset="0%" stop-color="#C13B28" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#C13B28" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Soft background glow -->
+      <circle cx="250" cy="250" r="232" fill="url(#gg)"/>
+
+      <!-- Globe wireframe -->
+      <g stroke="#C13B28" fill="none">
+        <!-- Outer circle -->
+        <circle cx="250" cy="250" r="232" stroke-width="0.8" opacity="0.22"/>
+
+        <!-- Latitude lines -->
+        <g opacity="0.14" stroke-width="0.7">
+          <ellipse cx="250" cy="250" rx="232" ry="81"/>
+          <ellipse cx="250" cy="134" rx="201" ry="70"/>
+          <ellipse cx="250" cy="366" rx="201" ry="70"/>
+          <ellipse cx="250" cy="49"  rx="116" ry="41"/>
+          <ellipse cx="250" cy="451" rx="116" ry="41"/>
+        </g>
+
+        <!-- Meridians — clipped to sphere -->
+        <g clip-path="url(#gc)" opacity="0.14" stroke-width="0.7">
+          <line x1="250" y1="18" x2="250" y2="482"/>
+          <ellipse cx="250" cy="250" rx="116" ry="232"/>
+          <ellipse cx="250" cy="250" rx="201" ry="232"/>
+        </g>
+      </g>
+
+      <!-- Destination dots — world locations -->
+      <g fill="#C13B28">
+        <!-- Raleigh/home -->
+        <circle cx="250" cy="250" r="4" opacity="0.6" class="globe-center-pulse"/>
+        <!-- International dots -->
+        <circle cx="316" cy="196" r="2.5" opacity="0.4"/>
+        <circle cx="174" cy="218" r="2"   opacity="0.35"/>
+        <circle cx="294" cy="314" r="2"   opacity="0.35"/>
+        <circle cx="162" cy="168" r="1.8" opacity="0.3"/>
+        <circle cx="348" cy="272" r="2"   opacity="0.35"/>
+        <circle cx="228" cy="152" r="1.8" opacity="0.3"/>
+        <circle cx="336" cy="338" r="1.8" opacity="0.28"/>
+        <circle cx="194" cy="302" r="1.5" opacity="0.25"/>
+      </g>
+
+      <!-- Sending lines from center — "sent out" -->
+      <g stroke="#C13B28" stroke-width="0.6" opacity="0.12">
+        <line x1="250" y1="250" x2="316" y2="196"/>
+        <line x1="250" y1="250" x2="174" y2="218"/>
+        <line x1="250" y1="250" x2="294" y2="314"/>
+        <line x1="250" y1="250" x2="348" y2="272"/>
+        <line x1="250" y1="250" x2="228" y2="152"/>
+        <line x1="250" y1="250" x2="336" y2="338"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">
+        <span class="eyebrow">Summit Church · Raleigh-Durham, NC &nbsp;·&nbsp; Applications close May 31</span>
+      </div>
+      <h1 class="display-serif hero-headline reveal reveal-delay-1">
+        Your work is<br /><em>your calling.</em>
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Renewal Residency is a two-year residency that equips early-career professionals to integrate faith, career, and God's global mission — without choosing between them.
+      </p>
+    </div>
+  </div>
+  <div class="hero-stat-strip">
+    <div class="container">
+      <div class="hero-stats">
+        <div class="hero-stat reveal">
+          <span class="hero-stat-num">2</span>
+          <span class="hero-stat-label">Year Program</span>
+        </div>
+        <div class="hero-stat reveal reveal-delay-1">
+          <span class="hero-stat-num">5–10</span>
+          <span class="hero-stat-label">Hrs / Week Commitment</span>
+        </div>
+        <div class="hero-stat reveal reveal-delay-2">
+          <span class="hero-stat-num">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="width:2.4rem;height:2.4rem;color:var(--red);">
+              <circle cx="16" cy="16" r="13"/>
+              <ellipse cx="16" cy="16" rx="6" ry="13"/>
+              <line x1="3" y1="16" x2="29" y2="16"/>
+              <path d="M5 9.5 Q16 13 27 9.5"/>
+              <path d="M5 22.5 Q16 19 27 22.5"/>
+            </svg>
+          </span>
+          <span class="hero-stat-label">Kingdom Impact</span>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <svg class="scroll-chevron" viewBox="0 0 24 24"><polyline points="6 10 12 16 18 10"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEM VALIDATION ───────────────────────────── -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="problem-inner">
+      <div class="problem-left">
+        <span class="eyebrow reveal">Sound Familiar?</span>
+        <h2 class="display-serif problem-headline reveal reveal-delay-1">
+          You feel<br />the <em>tension.</em>
+        </h2>
+        <p class="problem-body reveal reveal-delay-2">
+          You're ambitious, faith-filled, and early in your career. But somewhere between Sunday and Monday morning, something gets lost. You're not alone — and it doesn't have to stay that way.
+        </p>
+      </div>
+      <div class="problem-right">
+        <div class="problem-tensions">
+          <div class="problem-tension reveal">
+            <div class="problem-tension-mark"></div>
+            <p class="problem-tension-text">Your faith and your work feel like <em>two separate lives</em> you're trying to keep balanced.</p>
+          </div>
+          <div class="problem-tension reveal reveal-delay-1">
+            <div class="problem-tension-mark"></div>
+            <p class="problem-tension-text">You want to pursue excellence in your career and do something that <em>matters eternally</em> — but you feel like you have to choose.</p>
+          </div>
+          <div class="problem-tension reveal reveal-delay-2">
+            <div class="problem-tension-mark"></div>
+            <p class="problem-tension-text">You sense God has a purpose for your work — but how do you not settle for your job being <em>just a means to provide?</em></p>
+          </div>
+        </div>
+        <div class="problem-bridge reveal reveal-delay-3">
+          Renewal Residency exists because <strong>the tension you're feeling is real</strong> — and we believe God is using your unique skills in the workplace to bring His kingdom to earth. We exist to help you live that out.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─────────────────────────────────────────── -->
+<section class="about" id="about">
+  <div class="about-bg-arc"></div>
+  <div class="container">
+
+    <!-- Top: headline left, body right -->
+    <div class="about-top">
+      <div>
+        <span class="eyebrow reveal" style="color:var(--red-light); margin-bottom:1.5rem; display:block;">What is the Renewal Residency?</span>
+        <h2 class="display-serif about-headline reveal reveal-delay-1">
+          Where <em>kingdom mission</em><br />meets the<br />marketplace.
+        </h2>
+      </div>
+      <div class="about-top-right reveal reveal-delay-2">
+        <div class="about-body">
+          <p>
+            The Renewal Residency is a program of Summit Church in Raleigh-Durham, NC. We're combining the best of <strong style="color:var(--cream); font-weight:500;">talent development and global mobility</strong> from the corporate world with <strong style="color:var(--cream); font-weight:500;">best-in-class ministry and missions leadership development</strong> — forming a 2-year residency unlike anything else.
+          </p>
+          <p>
+            Graduates leave equipped to live out their calling in the marketplace and help bring about kingdom restoration in the world through their daily work.
+          </p>
+          <p style="margin-top:1.5rem; font-size:1.1rem; color:var(--cream); font-family:var(--font-display); line-height:1.5;">
+            If you believe God has more for your work than it just being a means to an end — this is for you.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillars row -->
+    <div class="about-pillars">
+      <div class="about-pillar reveal" data-num="1">
+        <div class="about-pillar-icon">
+          <!-- Community icon -->
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="7" r="2.5"/><path d="M2 20v-1a5 5 0 015-5h10a5 5 0 015 5v1"/></svg>
+        </div>
+        <span class="about-pillar-num">01 — Community</span>
+        <div class="about-pillar-title">A cohort who<br />shares your convictions.</div>
+        <p class="about-pillar-desc">Monthly forums with a diverse group of speakers across a variety of industries, curated content, and deep peer conversations to help you grow.</p>
+      </div>
+      <div class="about-pillar reveal reveal-delay-1" data-num="2">
+        <div class="about-pillar-icon">
+          <!-- Person/mentor icon -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 20v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <span class="about-pillar-num">02 — Mentorship</span>
+        <div class="about-pillar-title">Your guide in<br />your industry.</div>
+        <p class="about-pillar-desc">One-on-one pairing with someone from your specific career field who walks alongside your professional and spiritual growth.</p>
+      </div>
+      <div class="about-pillar reveal reveal-delay-2" data-num="3">
+        <div class="about-pillar-icon">
+          <!-- Globe icon -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 010 18M3 12h18"/><path d="M5.5 7.5A14 14 0 0112 6a14 14 0 016.5 1.5M5.5 16.5A14 14 0 0012 18a14 14 0 006.5-1.5"/></svg>
+        </div>
+        <span class="about-pillar-num">03 — Global Vision</span>
+        <div class="about-pillar-title">Local roots,<br />global reach.</div>
+        <p class="about-pillar-desc">Vision trips to church plants locally and internationally — see kingdom work in action and understand your part in it.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── WHO IT'S FOR ──────────────────────────────────── -->
+<section class="for-section" id="for">
+  <div class="container">
+    <div class="for-header">
+      <span class="eyebrow reveal">Is This For You?</span>
+      <h2 class="display-serif reveal reveal-delay-1">Built for those who <em>refuse to settle.</em></h2>
+    </div>
+    <div class="for-grid">
+      <div class="for-card for-card-yes reveal">
+        <p class="for-card-label">This IS for you if...</p>
+        <h3 class="for-card-title">You believe your work is part of God's design for the world.</h3>
+        <ul class="for-list">
+          <li>You don't want to separate faith from your career</li>
+          <li>You're hungry to grow and be developed — spiritually, personally, professionally</li>
+          <li>You want clarity, direction, and mentorship</li>
+          <li>You want to understand how your job plays a role in God's plan to reach the world</li>
+          <li>You want to pursue excellence and contribute to human flourishing</li>
+          <li>You want to play a meaningful role in church planting</li>
+        </ul>
+      </div>
+      <div class="for-card for-card-no reveal reveal-delay-1">
+        <p class="for-card-label">This is NOT for you if...</p>
+        <h3 class="for-card-title">You see work as simply a paycheck and nothing more.</h3>
+        <ul class="for-list">
+          <li>You view your job purely as a means to an end</li>
+          <li>You aren't ready to commit to intentional growth</li>
+          <li>You're looking for a low-engagement program</li>
+          <li>You don't believe your work has purpose in God's story</li>
+        </ul>
+        <div class="divider" style="margin-top:2rem; margin-bottom:0;"></div>
+        <p style="font-size:0.88rem; color:rgba(245,239,227,0.6); margin-top:1.25rem; line-height:1.6;">
+          Renewal Residency requires a high level of engagement. It's built for those who are ready to show up.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ──────────────────────────────────── -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="how-header">
+      <span class="eyebrow reveal">Program Structure</span>
+      <h2 class="display-serif how-headline reveal reveal-delay-1">
+        What does a<br /><em>typical month look like?</em>
+      </h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="how-step-icon">
+          <span class="how-step-num">1</span>
+          <!-- People icon -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6 20v-1a6 6 0 0112 0v1"/><circle cx="4" cy="9" r="2.5"/><path d="M1 20v-1a4 4 0 014-4"/><circle cx="20" cy="9" r="2.5"/><path d="M23 20v-1a4 4 0 00-4-4"/></svg>
+        </div>
+        <h3 class="how-step-title">Monthly Cohort Forum</h3>
+        <p class="how-step-desc">The whole cohort gathers together. You'll hear from different industry speakers and discuss curated content from books, articles, and podcasts explored in your own time.</p>
+      </div>
+      <div class="how-step reveal reveal-delay-1">
+        <div class="how-step-icon">
+          <span class="how-step-num">2</span>
+          <!-- Chat icon -->
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <h3 class="how-step-title">Peer Small Groups</h3>
+        <p class="how-step-desc">Gather with 1–2 other residents twice a month outside of the forum to discuss content and wrestle with how it applies to your specific work and context.</p>
+      </div>
+      <div class="how-step reveal reveal-delay-2">
+        <div class="how-step-icon">
+          <span class="how-step-num">3</span>
+          <!-- Compass icon -->
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        </div>
+        <h3 class="how-step-title">Leadership Development Guide</h3>
+        <p class="how-step-desc">Meet monthly with a guide matched to your industry. Together you'll build a personalized career development plan over the two years — someone investing directly in where you're going.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CURATED EXPERIENCES ──────────────────────────── -->
+<section class="experiences" id="experiences">
+  <div class="container">
+
+    <div class="experiences-header">
+      <div>
+        <span class="eyebrow reveal">What You'll Experience</span>
+        <h2 class="display-serif experiences-headline reveal reveal-delay-1">
+          Beyond the<br /><em>monthly rhythm.</em>
+        </h2>
+      </div>
+      <p class="experiences-intro reveal reveal-delay-2">
+        In addition to the monthly structure, Renewal Residency includes a set of curated experiences throughout the two years — each one designed to expand your vision, deepen your network, and ground your calling in something tangible.
+      </p>
+    </div>
+
+    <div class="experience-list">
+
+      <div class="experience-item reveal">
+        <div class="experience-num">01</div>
+        <div class="experience-body">
+          <span class="experience-tag">Annual Event</span>
+          <h3 class="experience-title">Faith & Work Conference</h3>
+          <p class="experience-desc">A curated gathering at the intersection of faith and professional life. Hear from practitioners, leaders, and thinkers who are living out the integration you're pursuing — and connect with others doing the same.</p>
+        </div>
+      </div>
+
+      <div class="experience-item reveal reveal-delay-1">
+        <div class="experience-num">02</div>
+        <div class="experience-body">
+          <span class="experience-tag">Global Immersion</span>
+          <h3 class="experience-title">International Networking & Vision Trip</h3>
+          <p class="experience-desc">Travel with your cohort to meet global leaders, experience church planting on the ground, and see how the marketplace and mission intersect beyond American borders. A perspective-altering week.</p>
+        </div>
+      </div>
+
+      <div class="experience-item reveal reveal-delay-2">
+        <div class="experience-num">03</div>
+        <div class="experience-body">
+          <span class="experience-tag">Domestic Immersion</span>
+          <h3 class="experience-title">Domestic Church Planting & Networking Trip</h3>
+          <p class="experience-desc">Visit a church plant in another U.S. city, meet the team, and see how professionals are embedding themselves in new communities for the sake of the gospel. Builds your vision for what's possible close to home.</p>
+        </div>
+      </div>
+
+      <div class="experience-item reveal reveal-delay-3">
+        <div class="experience-num">04</div>
+        <div class="experience-body">
+          <span class="experience-tag">Marketplace Access</span>
+          <h3 class="experience-title">Visit Local Business Headquarters</h3>
+          <p class="experience-desc">Get behind the scenes at leading companies in the Raleigh-Durham area. Meet executives who integrate their faith in the workplace and gain access to networks that aren't available anywhere else.</p>
+        </div>
+      </div>
+
+      <div class="experience-item reveal reveal-delay-4">
+        <div class="experience-num">05</div>
+        <div class="experience-body">
+          <span class="experience-tag">Personal Growth</span>
+          <h3 class="experience-title">Personalized Development Plan</h3>
+          <p class="experience-desc">Work alongside your guide to build a development plan tailored to where you are and where you're going — covering career trajectory, spiritual formation, and leadership growth over the two years.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── INVESTMENT ────────────────────────────────────── -->
+<section class="investment" id="investment">
+  <div class="container">
+    <div class="investment-inner">
+      <div>
+        <span class="eyebrow reveal">The Commitment</span>
+        <h2 class="display-serif investment-headline reveal reveal-delay-1">
+          An <em>investment</em> in your calling.
+        </h2>
+        <p class="investment-body reveal reveal-delay-2">
+          Growth is never without cost. Renewal Residency asks you to show up — financially, and with your time. What you receive in return is mentorship, community, a vision, a global network, and a foundation that shapes the arc of your career and your faith.
+        </p>
+      </div>
+      <div class="investment-cards">
+        <div class="investment-card reveal reveal-delay-1">
+          <div class="investment-card-val">$5,000</div>
+          <div class="investment-card-sep"></div>
+          <div class="investment-card-right">
+            <p class="investment-card-label">Program Investment</p>
+            <p class="investment-card-note">Total program fee covering mentorship, cohort events, and vision trips.</p>
+          </div>
+        </div>
+        <div class="investment-card reveal reveal-delay-2">
+          <div class="investment-card-val">5–10</div>
+          <div class="investment-card-sep"></div>
+          <div class="investment-card-right">
+            <p class="investment-card-label">Hours Per Week</p>
+            <p class="investment-card-note">Time commitment for forums, peer groups, guide meetings, and curated material and content each month.</p>
+          </div>
+        </div>
+        <div class="investment-card reveal reveal-delay-3">
+          <div class="investment-card-val">2</div>
+          <div class="investment-card-sep"></div>
+          <div class="investment-card-right">
+            <p class="investment-card-label">Year Program</p>
+            <p class="investment-card-note">A full two-year journey of intentional formation alongside a cohort.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ───────────────────────────────────────── -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="process-inner">
+      <div>
+        <span class="eyebrow reveal" style="color:var(--red-light);">Application Process</span>
+        <h2 class="display-serif process-headline reveal reveal-delay-1">
+          Your path<br />to the <em>cohort.</em>
+        </h2>
+        <p class="process-body reveal reveal-delay-2">
+          The process is simple and relational. We want to make sure Renewal Residency is the right fit for you — and that you're the right fit for us.
+        </p>
+      </div>
+      <div class="process-steps reveal reveal-delay-1">
+        <div class="process-step">
+          <div class="process-step-line">
+            <div class="process-step-dot">1</div>
+            <div class="process-step-connector"></div>
+          </div>
+          <div class="process-step-body">
+            <h3 class="process-step-title">Interest Meeting</h3>
+            <p class="process-step-desc">Join an upcoming interest meeting to ask questions and learn more about the residency before deciding to apply. Interest meetings are held in late April and early May — email Julie at <a href="mailto:jscrudato@summitchurch.com" style="color:var(--red-light);border-bottom:1px solid rgba(217,95,69,0.35);">jscrudato@summitchurch.com</a> for the link.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-line">
+            <div class="process-step-dot">2</div>
+            <div class="process-step-connector"></div>
+          </div>
+          <div class="process-step-body">
+            <h3 class="process-step-title">Application</h3>
+            <p class="process-step-desc">Download and complete our application so we can learn about your background, career goals, and what draws you to Renewal Residency. <a href="https://docs.google.com/document/d/1_cATvh45QjSupBR9mFqtsyCtbxxgwGXOl53GtxGHfdQ/edit?usp=sharing" target="_blank" rel="noopener" style="color:var(--red);font-weight:500;border-bottom:1px solid rgba(193,59,40,0.35);">Download Application →</a></p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-line">
+            <div class="process-step-dot">3</div>
+            <div class="process-step-connector"></div>
+          </div>
+          <div class="process-step-body">
+            <h3 class="process-step-title">30-Minute Interview</h3>
+            <p class="process-step-desc">A brief conversation to ensure the residency would be a mutually beneficial experience for both of us.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="process-step-line">
+            <div class="process-step-dot">4</div>
+            <div class="process-step-connector"></div>
+          </div>
+          <div class="process-step-body">
+            <h3 class="process-step-title">Welcome to the Cohort</h3>
+            <p class="process-step-desc">You're in. Your two-year journey begins with a community that will shape your work, faith, and calling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIFFERENTIATORS ───────────────────────────────── -->
+<section class="diff">
+  <div class="container">
+    <div class="diff-header">
+      <span class="eyebrow reveal">What Sets Us Apart</span>
+      <h2 class="display-serif diff-headline reveal reveal-delay-1">
+        Not just another<br /><em>leadership program.</em>
+      </h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-item reveal">
+        <div class="diff-item-icon">I</div>
+        <h3 class="diff-item-title">Church-Rooted Formation</h3>
+        <p class="diff-item-desc">Renewal Residency is a program of Summit Church in Raleigh-Durham — your formation is embedded in a living community, not isolated to a curriculum.</p>
+      </div>
+      <div class="diff-item reveal reveal-delay-1">
+        <div class="diff-item-icon">II</div>
+        <h3 class="diff-item-title">Church Planting at the Core</h3>
+        <p class="diff-item-desc">The underlying heartbeat of this program is church planting — local and global. Your marketplace work is connected to something bigger than your industry.</p>
+      </div>
+      <div class="diff-item reveal reveal-delay-2">
+        <div class="diff-item-icon">III</div>
+        <h3 class="diff-item-title">Values Based Leadership Development</h3>
+        <p class="diff-item-desc">We've borrowed the best of corporate talent development and global mobility programs and combined them with world-class ministry leadership training.</p>
+      </div>
+      <div class="diff-item reveal reveal-delay-3">
+        <div class="diff-item-icon">IV</div>
+        <h3 class="diff-item-title">Industry-Matched Mentorship</h3>
+        <p class="diff-item-desc">Your leadership guide isn't generic — they're selected from your specific career field, giving you mentorship that's actually applicable to your daily work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIRECTOR ─────────────────────────────────────── -->
+<section class="director" id="director">
+  <div class="container">
+    <div class="director-inner">
+      <div class="director-photo-wrap reveal">
+        <img class="director-photo" src="brand_assets/scrudato-20.jpeg" alt="Julie Scrudato" />
+      </div>
+      <div class="director-content">
+        <span class="eyebrow reveal">Program Director</span>
+        <h2 class="director-name reveal reveal-delay-1">Julie Scrudato</h2>
+        <p class="director-title reveal reveal-delay-2">Director, Renewal Residency · Summit Church</p>
+        <div class="director-bio reveal reveal-delay-3">
+          <p>Julie Scrudato is the founding director of Renewal Residency, bringing years of experience in leadership development to the program. She is passionate about equipping the next generation of professionals to integrate their faith with their daily work in meaningful, lasting ways.</p>
+          <p>Julie and her husband, Daniel are members of Summit Church's Blue Ridge campus, where they are deeply rooted. Together they are raising two bundles of joy.</p>
+        </div>
+        <div class="reveal reveal-delay-4">
+          <a href="mailto:jscrudato@summitchurch.com" class="btn btn-outline">Contact Julie with Questions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─────────────────────────────────── -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="eyebrow reveal" style="color:var(--red-light);">Heard From the Community</span>
+      <h2 class="display-serif testimonials-headline reveal reveal-delay-1">
+        Words from those who've <em>been there.</em>
+      </h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div>
+          <span class="testimonial-quote-mark">"</span>
+          <p class="testimonial-text">This program not only gave me a framework for being intentional about my faith in my career, but also connected me to a network of people united around the same purpose. Being around others in different fields who are all trying to live this out has been one of the most impactful parts for me, and it’s changed how I think about what my work can actually be used for.</p>
+        </div>
+        <div class="testimonial-attr">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <span class="testimonial-name">Paul Wei</span>
+            <span class="testimonial-role">Software Engineer</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div>
+          <span class="testimonial-quote-mark">"</span>
+          <p class="testimonial-text">Renewal Residency affirmed the dignity of all work and showed me that I can offer meaningful service to God at every stage of my career. This program helped me understand that full-time secular work doesn't make you a second class citizen in the Kingdom of God, but God has a unique purpose for you and your work!</p>
+        </div>
+        <div class="testimonial-attr">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <span class="testimonial-name">Avery Bain</span>
+            <span class="testimonial-role">Assistant Media Manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────── -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="faq-left">
+        <span class="eyebrow reveal">Common Questions</span>
+        <h2 class="display-serif faq-headline reveal reveal-delay-1">
+          Still have<br /><em>questions?</em>
+        </h2>
+        <p class="faq-left-body reveal reveal-delay-2">
+          We want to make sure this is the right fit before you apply. If you don't see your question here, reach out to Julie directly at <a href="mailto:jscrudato@summitchurch.com" style="color:var(--red); text-decoration:underline; text-underline-offset:3px;">jscrudato@summitchurch.com</a>.
+        </p>
+      </div>
+      <div class="faq-list reveal reveal-delay-1">
+
+        <details class="faq-item" open>
+          <summary class="faq-question">
+            Is this only for people at Summit Church?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">Currently, yes — Renewal Residency is a program of Summit Church and membership is required to participate. We're deeply committed to this being rooted in a local church community, not just a standalone program. That said, we hope to expand access in the future, so if you're not yet a member but are interested, reach out and let's talk.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            How much does it cost?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">The total program fee is $5,000 — a one-time investment for the full two years. This covers travel expenses for vision trips, forum speakers, curated materials and content, experiential programming, and the various costs that make the residency what it is. If cost is a barrier, reach out — we want to have that conversation.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            Can I do this while working full-time?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">Yes — the program is designed for working professionals. The monthly commitment is 5–10 hours and all core activities are scheduled with full-time work in mind. The international and domestic trips will require some PTO.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            What industries is this designed for?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">All of them. We've had residents from business, healthcare, education, tech, law, finance, entrepreneurship, and more. Your guide will be matched from your specific industry, so the mentorship is always directly relevant to your work.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            When does the next cohort begin?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">The next cohort begins in Fall 2026. Applications close May 31, 2026. The process starts with an interest meeting, followed by submitting your application and a brief interview before a final decision is made.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            How many people are in a cohort?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">Cohorts are kept intentionally small — around 15–20 people — to maintain a high-quality experience and genuine community. We limit enrollment to ensure every resident gets meaningful attention from their guide and real relationships within the cohort.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">
+            What happens after the two years?
+            <span class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <p class="faq-answer">You become part of the Renewal alumni network — a growing global community of professionals who share your conviction that work and faith belong together. Through the international and domestic trips, you'll have built relationships with leaders and church planters around the world. That network doesn't end at graduation; it's one of the most lasting things you take with you.</p>
+        </details>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────── -->
+<section class="cta-section" id="apply">
+  <div class="container cta-inner">
+    <div class="reveal">
+      <span class="deadline-badge"><span class="deadline-dot"></span>Applications close May 31, 2026</span>
+    </div>
+    <h2 class="cta-headline reveal reveal-delay-1">
+      God has <em>more</em><br />for your work.
+    </h2>
+    <p class="cta-desc reveal reveal-delay-2">
+      The next cohort begins Fall 2026. Spots are limited — download the application, complete it, and take the first step toward something bigger.
+    </p>
+    <div class="cta-buttons reveal reveal-delay-3">
+      <a href="https://docs.google.com/document/d/1_cATvh45QjSupBR9mFqtsyCtbxxgwGXOl53GtxGHfdQ/edit?usp=sharing" target="_blank" rel="noopener" class="btn btn-white btn-primary">Download Application</a>
+    </div>
+    <div class="interest-divider reveal reveal-delay-4"><span>or</span></div>
+    <div class="interest-form reveal reveal-delay-4">
+      <input type="email" class="interest-input" placeholder="Your email address" />
+      <a href="mailto:jscrudato@summitchurch.com?subject=Question about Renewal Residency" class="btn btn-ghost" style="white-space:nowrap;">Get in Touch with Julie</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <img src="brand_assets/renewal residency_tiny logo.png" alt="Renewal Residency" style="image-rendering:-webkit-optimize-contrast; image-rendering:crisp-edges;" />
+    </div>
+    <p class="footer-text">© 2026 Renewal Residency · A ministry of Summit Church, Raleigh-Durham, NC</p>
+    <a href="https://docs.google.com/document/d/1_cATvh45QjSupBR9mFqtsyCtbxxgwGXOl53GtxGHfdQ/edit?usp=sharing" target="_blank" rel="noopener" class="footer-link">Apply Now →</a>
+  </div>
+</footer>
+
+<!-- ─── JS ────────────────────────────────────────────── -->
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  const mobileToggle = document.querySelector('.nav-mobile-toggle');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileToggle.setAttribute('aria-controls', 'nav-mobile-menu');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+
+    const setMobileMenu = (isOpen) => {
+      nav.classList.toggle('mobile-open', isOpen);
+      mobileToggle.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    };
+
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.contains('mobile-open');
+      setMobileMenu(!isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMobileMenu(false));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!nav.contains(event.target)) {
+        setMobileMenu(false);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 680) {
+        setMobileMenu(false);
+      }
+    });
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Trigger hero reveals immediately
+  document.querySelectorAll('.hero .reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 100);
+  });
+</script>
+
+</body>
+</html>
